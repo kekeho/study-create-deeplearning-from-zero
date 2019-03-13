@@ -1,1 +1,3 @@
 *.pyc
+nim/*
+!nim/*.nim
