@@ -1,5 +1,5 @@
 import neo
-import utils
+import ../utils
 import plotly
 
 proc sigmoid(x: Vector): auto=

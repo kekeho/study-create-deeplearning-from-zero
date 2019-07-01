@@ -1,4 +1,4 @@
-import utils
+import ../utils
 import sequtils
 
 type Perceptron = ref object
