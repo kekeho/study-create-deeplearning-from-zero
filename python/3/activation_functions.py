@@ -16,6 +16,11 @@ def relu(x: np.ndarray or int or float):
     return np.maximum(0, x)
 
 
+def identity_function(x: np.ndarray):
+    """Do nothing"""
+    return x
+
+
 def main():
     x = np.arange(-5, 5, 0.1)
     y_step = step(x)
