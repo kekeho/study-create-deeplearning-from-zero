@@ -2,15 +2,15 @@ import neo
 import math
 import ../utils
 
-proc sigmoid(x: float64): float64 =
+proc sigmoid*(x: float64): float64 =
     return 1 / (1 + math.exp(-1 * x))
 
 
-proc identity_function[T](x: T): T = 
+proc identity_function*[T](x: T): T = 
     return x
 
 
-proc softmax[T](a: Matrix[T]): Matrix[T] =
+proc softmax*[T](a: Matrix[T]): Matrix[T] =
     let c = a.max
     let a_minus_c = a.map(proc (x: float64): float64 = x - c)
     let exp_a = neo.exp(a_minus_c)
@@ -18,17 +18,17 @@ proc softmax[T](a: Matrix[T]): Matrix[T] =
     return exp_a / sum_exp_a
 
 
-type Network = ref object
-    weight_list: seq[neo.Matrix[float64]]
-    bias_list: seq[neo.Matrix[float64]]
-    h: proc(x: float64): float64
-    sigma: proc (x: Matrix[float64]): Matrix[float64]
+type Network* = ref object
+    weight_list*: seq[neo.Matrix[float64]]
+    bias_list*: seq[neo.Matrix[float64]]
+    h*: proc(x: float64): float64
+    sigma*: proc (x: Matrix[float64]): Matrix[float64]
 
-proc depth(self: Network): int =
+proc depth*(self: Network): int =
     return len(self.weight_list)
 
 
-proc forward(self: Network, input: neo.Matrix[float64]): neo.Matrix[float64] =
+proc forward*(self: Network, input: neo.Matrix[float64]): neo.Matrix[float64] =
     var neuron_input = input
     var a: neo.Matrix[float64]
     for i in 0..(self.depth - 1):
