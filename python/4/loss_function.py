@@ -4,9 +4,17 @@ def mean_squared_error(y: np.ndarray, teacher: np.ndarray) -> float:
     return np.sum((y - teacher) ** 2) / 2
 
 
-def cross_entropy_error(y: np.ndarray, teacher: np.ndarray) -> float:
+def cross_entropy_error(y: np.ndarray, teacher: np.ndarray, one_hot=True) -> float:
+    if y.ndim == 1:
+        teacher = teacher.reshape(1, teacher.size)
+        y = y.reshape(1, y.size)
+
+    batch_size = y.shape[0]
     delta = 1e-7
-    return -1 * np.sum(t * np.log(y + delta))
+    if one_hot:
+        return -1 * np.sum(t * np.log(y + delta)) / batch_size
+    else:
+        return -1 * np.sum(np.log(y[np.arange(batch_size), teacher])) / batch_size
 
 
 if __name__ == "__main__":
