@@ -12,7 +12,7 @@ def cross_entropy_error(y: np.ndarray, teacher: np.ndarray, one_hot=True) -> flo
     batch_size = y.shape[0]
     delta = 1e-7
     if one_hot:
-        return -1 * np.sum(t * np.log(y + delta)) / batch_size
+        return -1 * np.sum(teacher * np.log(y + delta)) / batch_size
     else:
         return -1 * np.sum(np.log(y[np.arange(batch_size), teacher])) / batch_size
 

@@ -17,12 +17,12 @@ def numerial_gradient(f: FunctionType, x: int or float) -> float:
     for idx in range(x.size):
         tmp_val = x[idx]
         x[idx] = tmp_val + h
-        fxh1 = f(*x)
+        fxh1 = f(x)
 
         x[idx] = tmp_val - h
-        fxh2 = f(*x)
+        fxh2 = f(x)
 
-        grad[idx] = (fxh1 - fxh2) / 2 * h
+        grad[idx] = (fxh1 - fxh2) / (2 * h)
         x[idx] = tmp_val
 
     return grad
